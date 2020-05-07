@@ -13,5 +13,12 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
+    $router->resource('columnist', 'ColumnistController'); // 写手管理
+    $router->resource('account_category', 'AccountCategoryController'); // 账单分类
+    $router->resource('statement', 'StatementController'); // 账单流水
+
+    $router->group(['prefix' => 'api'], function(Router $router){
+        $router->get('account_category', 'AccountCategoryController@category');
+    });
 
 });
