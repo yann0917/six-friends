@@ -20,9 +20,11 @@ class ColumnistController extends AdminController
         return Grid::make(new Columnist(), function (Grid $grid) {
             $grid->id->sortable();
             $grid->nickname;
-            $grid->gender->using([0=>'女',1=>'男'])->label([0=>'info', 1=>'success']);
+            $grid->gender->using([0 => '女', 1 => '男'])
+                ->label([0 => 'info', 1 => 'success']);
             $grid->phone;
             $grid->email;
+            $grid->score->sortable();
             $grid->created_at;
             $grid->updated_at->sortable();
 
@@ -37,7 +39,6 @@ class ColumnistController extends AdminController
      * Make a show builder.
      *
      * @param mixed $id
-     *
      * @return Show
      */
     protected function detail($id)
@@ -45,9 +46,10 @@ class ColumnistController extends AdminController
         return Show::make($id, new Columnist(), function (Show $show) {
             $show->id;
             $show->nickname;
-            $show->gender->using([0=>'女',1=>'男']);
+            $show->gender->using([0 => '女', 1 => '男']);
             $show->phone;
-            $show->email->prepend('mailto:');
+            $show->email;
+            $show->score;
             $show->created_at;
             $show->updated_at;
         });
@@ -63,9 +65,16 @@ class ColumnistController extends AdminController
         return Form::make(new Columnist(), function (Form $form) {
             $form->display('id')->width(4);
             $form->text('nickname')->width(4)->required();
-            $form->select('gender')->options([0=>'女',1=>'男'])->width(4)->required();
-            $form->text('phone')->width(4);
-            $form->text('email')->width(4);
+            $form->select('gender')
+                ->options([0 => '女', 1 => '男'])
+                ->width(4)->required();
+            $form->mobile('phone')
+                ->options(['mask' => '999 9999 9999'])
+                ->width(4);
+            $form->email('email')->width(4);
+            $form->number('score')
+                ->min(0)
+                ->max(10)->width(4);
 
             $form->display('created_at')->width(4);
             $form->display('updated_at')->width(4);

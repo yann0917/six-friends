@@ -3,7 +3,6 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\Statement;
-use App\Models\AccountCategory;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -19,18 +18,19 @@ class StatementController extends AdminController
     protected function grid()
     {
         return Grid::make(new Statement(), function (Grid $grid) {
-            $grid->disableBatchDelete();
             $grid->disableDeleteButton();
 
             $grid->model()->with(['category']);
             $grid->id->sortable();
             $grid->date;
-            $grid->money->help('人民币：元');
+            $grid->column('money')->display(function () {
+                return $this->money * 0.01;
+            })->help('人民币：元');
             $grid->column('category_name', '分类')->display(function () {
                 return $this->category['name'];
             });
-            $grid->type->using([1=>'收入', 2=>'支出'])->sortable();
-            $grid->memo;
+            $grid->type->using([1 => '收入', 2 => '支出'])->sortable();
+            $grid->memo->limit(50, '...');
             $grid->created_at;
             // $grid->updated_at->sortable();
 
@@ -38,6 +38,10 @@ class StatementController extends AdminController
                 $filter->panel();
                 $filter->equal('id')->width(3);
                 $filter->between('date')->datetime(['format' => 'YYYY-MM-DD'])->width(3);
+                $filter->where('money', function ($query) {
+                    $input = $this->input * 100;
+                    $query->where('money', '=', "{$input}");
+                })->width(3);
             });
         });
     }
@@ -46,22 +50,23 @@ class StatementController extends AdminController
      * Make a show builder.
      *
      * @param mixed $id
-     *
      * @return Show
      */
     protected function detail($id)
     {
-        return Show::make($id, new Statement(), function (Show $show) {
+        return Show::make($id, new Statement(['category']), function (Show $show) {
             $show->disableDeleteButton();
 
             $show->id;
             $show->date;
-            $show->money;
-            $show->type->using([1=>'收入', 2=>'支出']);
-            $show->category_id;
+            $show->money->as(function ($money) {
+                return $money * 0.01;
+            });
+            $show->type->using([1 => '收入', 2 => '支出']);
+            $show->category('分类')->get('name');
             $show->memo;
             $show->created_at;
-            // $show->updated_at;
+            $show->updated_at;
         });
     }
 
@@ -81,7 +86,7 @@ class StatementController extends AdminController
                 ->symbol('￥')
                 ->required();
             $form->select('type')
-                ->options([1=>'收入',2=>'支出'])
+                ->options([1 => '收入', 2 => '支出'])
                 ->load('category_id', '/api/account_category')
                 ->required();
             $form->select('category_id', '分类')
@@ -91,6 +96,9 @@ class StatementController extends AdminController
                 ->required();
             $form->display('created_at');
             // $form->display('updated_at');
+            $form->saving(function (Form $form) {
+                $form->money *= 100; // 存储分
+            });
         });
     }
 }

@@ -38,6 +38,7 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection gender
      * @property Grid\Column|Collection phone
      * @property Grid\Column|Collection email
+     * @property Grid\Column|Collection score
      * @property Grid\Column|Collection type
      * @property Grid\Column|Collection deleted_at
      * @property Grid\Column|Collection parent_id
@@ -145,6 +146,7 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection gender
      * @property Show\Field|Collection phone
      * @property Show\Field|Collection email
+     * @property Show\Field|Collection score
      * @property Show\Field|Collection type
      * @property Show\Field|Collection deleted_at
      * @property Show\Field|Collection parent_id
@@ -231,19 +233,19 @@ namespace Dcat\Admin {
 
 namespace Dcat\Admin\Grid {
     /**
-     
+
      */
     class Column {}
 
     /**
-     
+
      */
     class Filter {}
 }
 
 namespace Dcat\Admin\Show {
     /**
-     
+
      */
     class Field {}
 }
