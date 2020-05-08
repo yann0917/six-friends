@@ -40,6 +40,8 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection status
      * @property Grid\Column|Collection phone
      * @property Grid\Column|Collection email
+     * @property Grid\Column|Collection qq_account
+     * @property Grid\Column|Collection wechat_account
      * @property Grid\Column|Collection score
      * @property Grid\Column|Collection type
      * @property Grid\Column|Collection deleted_at
@@ -148,6 +150,8 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection gender
      * @property Show\Field|Collection phone
      * @property Show\Field|Collection email
+     * @property Show\Field|Collection qq_account
+     * @property Show\Field|Collection wechat_account
      * @property Show\Field|Collection score
      * @property Show\Field|Collection status
      * @property Show\Field|Collection bio
