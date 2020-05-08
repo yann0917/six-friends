@@ -13,4 +13,19 @@ class Columnist extends EloquentRepository
      * @var string
      */
     protected $eloquentClass = ColumnistModel::class;
+
+    public static function getStatus(): array
+    {
+        return ColumnistModel::getStatus();
+    }
+
+    public static function getGender(): array
+    {
+        return ColumnistModel::getGender();
+    }
+
+    public static function getType(): array
+    {
+        return ColumnistModel::getType();
+    }
 }

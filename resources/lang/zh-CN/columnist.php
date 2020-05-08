@@ -6,9 +6,12 @@ return [
     'fields' => [
         'nickname' => '昵称',
         'gender' => '性别',
+        'bio' => '简介',
+        'type' => '写手类型',
         'phone' => '手机号',
         'email' => '邮箱',
         'score' => '评分',
+        'status' => '合作状态',
     ],
     'options' => [
     ],

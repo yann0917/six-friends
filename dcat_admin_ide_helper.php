@@ -36,6 +36,8 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection require_dev
      * @property Grid\Column|Collection nickname
      * @property Grid\Column|Collection gender
+     * @property Grid\Column|Collection bio
+     * @property Grid\Column|Collection status
      * @property Grid\Column|Collection phone
      * @property Grid\Column|Collection email
      * @property Grid\Column|Collection score
@@ -147,6 +149,8 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection phone
      * @property Show\Field|Collection email
      * @property Show\Field|Collection score
+     * @property Show\Field|Collection status
+     * @property Show\Field|Collection bio
      * @property Show\Field|Collection type
      * @property Show\Field|Collection deleted_at
      * @property Show\Field|Collection parent_id
