@@ -20,6 +20,7 @@ Route::group([
 
     $router->group(['prefix' => 'api'], function(Router $router){
         $router->get('account_category', 'AccountCategoryController@category');
+        $router->get('columnists', 'ColumnistController@columnists');
     });
 
 });

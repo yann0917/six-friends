@@ -1,4 +1,4 @@
-<?php 
+<?php
 return [
     'labels' => [
         'Statement' => '账单',
@@ -9,6 +9,10 @@ return [
         'category_id' => '分类 ID',
         'type' => '类型',
         'memo' => '备注',
+        'snapshot'=>'交易快照',
+        'columnist_nickname'=>'写手昵称',
+        'words_count' => '字数统计',
+        'article_num'=>'文章数量',
     ],
     'options' => [
     ],

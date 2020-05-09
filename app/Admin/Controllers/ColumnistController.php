@@ -5,6 +5,7 @@ namespace App\Admin\Controllers;
 use App\Admin\Repositories\Columnist;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
+use Dcat\Admin\IFrameGrid;
 use Dcat\Admin\Show;
 use Dcat\Admin\Controllers\AdminController;
 
@@ -38,7 +39,7 @@ class ColumnistController extends AdminController
                 ->using(Columnist::getStatus())
                 ->filter(
                     Grid\Column\Filter\In::make(Columnist::getStatus())
-                );
+                )->dot([0 => 'danger', 1 => 'success', 2 => 'warning', 3 => 'secondary']);;
             $grid->created_at;
 
             $grid->filter(function (Grid\Filter $filter) {
@@ -80,7 +81,7 @@ class ColumnistController extends AdminController
             $show->score;
             $show->status
                 ->using(Columnist::getStatus())
-                ->dot([0 => 'danger', 1 => 'success', 2 => 'secondary', 3 => 'warning']);
+                ->dot([0 => 'danger', 1 => 'success', 2 => 'warning', 3 => 'secondary']);
             $show->created_at;
             $show->updated_at;
         });
@@ -132,5 +133,30 @@ class ColumnistController extends AdminController
                     ->default('');
             });
         });
+    }
+
+    /**
+     * 弹框选择器视图
+     *
+     * @return IFrameGrid
+     */
+    protected function iFrameGrid()
+    {
+        $grid = new IFrameGrid(new Columnist());
+        $grid->rowSelector()->titleColumn('nickname');
+
+        $grid->id->sortable();
+        $grid->nickname;
+        $grid->gender->using(Columnist::getGender())
+            ->label([0 => 'success', 1 => 'danger']);
+        $grid->type->using(Columnist::getType(), '未知');
+        $grid->status->using(Columnist::getStatus())
+            ->dot([0 => 'danger', 1 => 'success', 2 => 'warning', 3 => 'secondary']);
+        $grid->filter(function (Grid\Filter $filter) {
+            $filter->equal('id');
+            $filter->like('nickname');
+        });
+
+        return $grid;
     }
 }

@@ -36,6 +36,10 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection nickname
      * @property Grid\Column|Collection gender
      * @property Grid\Column|Collection type
+     * @property Grid\Column|Collection snapshot
+     * @property Grid\Column|Collection columnist_id
+     * @property Grid\Column|Collection words_count
+     * @property Grid\Column|Collection article_num
      * @property Grid\Column|Collection bio
      * @property Grid\Column|Collection wechat_account
      * @property Grid\Column|Collection qq_account
@@ -170,6 +174,10 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection date
      * @property Show\Field|Collection memo
      * @property Show\Field|Collection money
+     * @property Show\Field|Collection snapshot
+     * @property Show\Field|Collection columnist_id
+     * @property Show\Field|Collection words_count
+     * @property Show\Field|Collection article_num
      * @property Show\Field|Collection category
      * @property Show\Field|Collection admin_uid
      * @property Show\Field|Collection title
@@ -231,6 +239,10 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection memo(string $label = null)
      * @method Show\Field|Collection money(string $label = null)
      * @method Show\Field|Collection category(string $label = null)
+     * @method Show\Field|Collection snapshot(string $label = null)
+     * @method Show\Field|Collection columnist_nickname(string $label = null)
+     * @method Show\Field|Collection words_count(string $label = null)
+     * @method Show\Field|Collection article_num(string $label = null)
      * @method Show\Field|Collection admin_uid(string $label = null)
      * @method Show\Field|Collection content(string $label = null)
      * @method Show\Field|Collection deleted_at(string $label = null)

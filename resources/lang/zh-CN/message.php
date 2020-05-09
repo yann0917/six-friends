@@ -1,10 +1,10 @@
-<?php 
+<?php
 return [
     'labels' => [
-        'Message' => 'Message',
+        'Message' => '留言',
     ],
     'fields' => [
-        'admin_uid' => '后台用户 uid',
+        'admin_uid' => 'uid',
         'title' => '标题',
         'content' => '留言',
     ],
