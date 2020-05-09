@@ -19,6 +19,7 @@ class StatementController extends AdminController
     {
         return Grid::make(new Statement(), function (Grid $grid) {
             $grid->disableDeleteButton();
+            $grid->model()->orderByDesc('created_at');
 
             $grid->model()->with(['category']);
             $grid->id->sortable();

@@ -18,6 +18,7 @@ class ColumnistController extends AdminController
     protected function grid()
     {
         return Grid::make(new Columnist(), function (Grid $grid) {
+            $grid->model()->orderByDesc('created_at');
             $grid->id->sortable();
             $grid->nickname;
             $grid->gender->using(Columnist::getGender())
