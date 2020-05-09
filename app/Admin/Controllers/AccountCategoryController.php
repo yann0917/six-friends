@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\AccountCategory;
+use App\Admin\Repositories\Statement;
 use App\Models\AccountCategory as ModelsAccountCategory;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
@@ -21,12 +22,19 @@ class AccountCategoryController extends AdminController
     protected function grid()
     {
         return Grid::make(new AccountCategory(), function (Grid $grid) {
+            $grid->actions(function (Grid\Displayers\Actions $actions) {
+                $id = $actions->row->id;
+                if (in_array($id, array_keys(AccountCategory::getBaseCate()))) {
+                    $actions->disableEdit();
+                    $actions->disableDelete();
+                }
+            });
             $grid->id->sortable();
             $grid->name;
-            $grid->type->using([1 => '收入', 2 => '支出'])
-                ->label([1 => 'success', 2 => 'danger']);
+            $grid->type->using(Statement::getType())
+                ->label([1 => 'success', 2 => 'danger'])
+                ->filter(Grid\Column\Filter\In::make(Statement::getType()));
             $grid->created_at;
-            // $grid->updated_at->sortable();
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->panel();
@@ -45,9 +53,15 @@ class AccountCategoryController extends AdminController
     protected function detail($id)
     {
         return Show::make($id, new AccountCategory(), function (Show $show) {
+            $show->panel()
+                ->tools(function (Show\Tools $tools) {
+                    $tools->disableEdit();
+                    $tools->disableDelete();
+                });
+
             $show->id;
             $show->name;
-            $show->type->using([1 => '收入', 2 => '支出']);
+            $show->type->using(Statement::getType());
             $show->created_at;
             $show->updated_at;
         });
@@ -64,7 +78,7 @@ class AccountCategoryController extends AdminController
             $form->display('id')->width(3);
             $form->text('name')->width(3)->required();
             $form->select('type')
-                ->options([1 => '收入', 2 => '支出'])
+                ->options(Statement::getType())
                 ->width(3)
                 ->required();
 
@@ -76,6 +90,7 @@ class AccountCategoryController extends AdminController
     public function category(Request $request)
     {
         $type = $request->get('q');
-        return ModelsAccountCategory::where('type', $type)->get(['id', DB::raw('name as text')]);
+        return ModelsAccountCategory::where('type', $type)
+            ->get(['id', DB::raw('name as text')]);
     }
 }

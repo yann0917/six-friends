@@ -13,4 +13,9 @@ class AccountCategory extends EloquentRepository
      * @var string
      */
     protected $eloquentClass = AccountCategoryModel::class;
+
+    public static function getBaseCate(): array
+    {
+        return AccountCategoryModel::getBaseCate();
+    }
 }

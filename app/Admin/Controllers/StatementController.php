@@ -30,7 +30,7 @@ class StatementController extends AdminController
             $grid->column('category_name', '分类')->display(function () {
                 return $this->category['name'];
             });
-            $grid->type->using([1 => '收入', 2 => '支出'])->sortable();
+            $grid->type->using(Statement::getType())->sortable();
             $grid->memo->limit(50, '...');
             $grid->created_at;
             // $grid->updated_at->sortable();
@@ -63,7 +63,7 @@ class StatementController extends AdminController
             $show->money->as(function ($money) {
                 return $money * 0.01;
             });
-            $show->type->using([1 => '收入', 2 => '支出']);
+            $show->type->using(Statement::getType());
             $show->category('分类')->get('name');
             $show->memo;
             $show->created_at;
@@ -87,7 +87,7 @@ class StatementController extends AdminController
                 ->symbol('￥')
                 ->required();
             $form->select('type')
-                ->options([1 => '收入', 2 => '支出'])
+                ->options(Statement::getType())
                 ->load('category_id', '/api/account_category')
                 ->required();
             $form->select('category_id', '分类')

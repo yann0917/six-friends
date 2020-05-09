@@ -21,4 +21,9 @@ class Statement extends EloquentRepository
         $form['money'] *= 0.01;
         return $form;
     }
+
+    public static function getType(): array
+    {
+        return StatementModel::getType();
+    }
 }
