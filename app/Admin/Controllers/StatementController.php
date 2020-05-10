@@ -3,7 +3,6 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\Statement;
-use App\Models\Columnist;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
