@@ -35,7 +35,7 @@ class StatementController extends AdminController
             $grid->type->using(Statement::getType())
                 ->label([1 => 'success', 2 => 'danger'])
                 ->sortable();
-            $grid->snapshot->image();
+            $grid->snapshot->image('', 48, 48);
             $grid->column('nickname', '写手')->display(function () {
                 return $this->columnist['nickname'];
             });
@@ -150,7 +150,7 @@ class StatementController extends AdminController
                 ->rows(10)
                 ->placeholder('请填写备注如进账说明、支出说明等')
                 ->required();
-            $form->image('snapshot');
+            $form->image('snapshot')->disk('admin');
             // 分块显示
             $form->block(6, function (Form\BlockForm $form) {
                 $form->title('写手费用信息');

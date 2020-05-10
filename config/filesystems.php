@@ -51,7 +51,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
 
@@ -65,6 +65,28 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
         ],
 
+        'admin' => [
+            'driver' => 'local',
+            'root' => public_path('uploads'),
+            'visibility' => 'public',
+            'url' => env('APP_URL') . '/uploads',
+        ],
+
+        'qiniu' => [
+            'driver' => 'qiniu',
+            'domains' => [
+                'default' => env('QINIU_DOMAIN'), //你的七牛域名
+                'https' => env('QINIU_DOMAIN'),   //你的HTTPS域名
+                'custom' => env('QINIU_DOMAIN'),  //你的自定义域名
+            ],
+            'access_key' => env('QINIU_ACCESS_KEY'),  //AccessKey
+            'secret_key' => env('QINIU_SECRET_KEY'),  //SecretKey
+            'bucket' => env('QINIU_BUCKET'),  //Bucket名字
+            'notify_url' => '',  //持久化处理回调地址
+            'access' => 'private',  //空间访问控制 public 或 private
+            'hotlink_prevention_key' => '',
+            'url' => 'http://of8kfibjo.bkt.clouddn.com/',  // 填写文件访问根url
+        ],
     ],
 
     /*
