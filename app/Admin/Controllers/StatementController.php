@@ -22,7 +22,7 @@ class StatementController extends AdminController
             $grid->disableDeleteButton();
             $grid->model()->orderByDesc('created_at');
 
-            $grid->model()->with(['category']);
+            $grid->model()->with(['category','columnist']);
             $grid->id->sortable();
             $grid->date;
             $grid->column('money')->display(function () {
@@ -35,7 +35,9 @@ class StatementController extends AdminController
                 ->label([1 => 'success', 2 => 'danger'])
                 ->sortable();
             $grid->snapshot->image();
-            $grid->columnist_id;
+            $grid->column('nickname', '写手')->display(function () {
+                return $this->columnist['nickname'];
+            });
             $grid->words_count;
             $grid->article_num;
             $grid->memo->limit(25, '...');
@@ -44,7 +46,16 @@ class StatementController extends AdminController
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->panel();
                 $filter->equal('id')->width(3);
-                // $filter->like('columnist_nickname')->width(3);
+                $filter->where('category_name', function ($query) {
+                    $query->whereHas('category', function ($query) {
+                        $query->where('name', 'like', "%{$this->input}%");
+                    });
+                }, '分类')->width(3);
+                $filter->where('nickname', function ($query) {
+                    $query->whereHas('columnist', function ($query) {
+                        $query->where('nickname', 'like', "%{$this->input}%");
+                    });
+                }, '写手昵称')->width(3);
                 $filter->between('date')->datetime(['format' => 'YYYY-MM-DD'])->width(3);
                 $filter->where('money', function ($query) {
                     $input = $this->input * 100;
@@ -100,6 +111,7 @@ class StatementController extends AdminController
             $form->display('id');
             $form->date('date')->required();
             $form->number('money')->default(1)
+                ->min(0)
                 ->required();
             $form->select('type')
                 ->options(Statement::getType())
@@ -109,7 +121,7 @@ class StatementController extends AdminController
                 ->required();
             $form->textarea('memo')
                 ->rows(10)
-                ->placeholder('请填写备注如进账说明，支出说明等')
+                ->placeholder('请填写备注如进账说明、支出说明等')
                 ->required();
             $form->image('snapshot');
             // 分块显示
@@ -123,8 +135,8 @@ class StatementController extends AdminController
                         return ModelsColumnist::findOrFail($v)->pluck('nickname', 'id');
                     });
 
-                $form->number('words_count');
-                $form->number('article_num');
+                $form->number('words_count')->min(0);
+                $form->number('article_num')->min(0);
             });
 
             $form->display('created_at');
