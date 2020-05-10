@@ -26,8 +26,8 @@ class ColumnistController extends AdminController
                 ->label([0 => 'success', 1 => 'danger']);
             $grid->type->using(Columnist::getType(), '未知');
             $grid->column('remuneration', '稿费总额')->display(function () {
-                // TODO:
-                return 100;
+                $money = (new Columnist())->statById($this->model()->id);
+                return $money * 0.01;
             });
             $grid->bio->limit(50, '...');
             $grid->wechat_account;

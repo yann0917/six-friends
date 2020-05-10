@@ -4,6 +4,7 @@ namespace App\Admin\Repositories;
 
 use Dcat\Admin\Repositories\EloquentRepository;
 use App\Models\Columnist as ColumnistModel;
+use App\Models\Statement as StatementModel;
 
 class Columnist extends EloquentRepository
 {
@@ -27,5 +28,10 @@ class Columnist extends EloquentRepository
     public static function getType(): array
     {
         return ColumnistModel::getType();
+    }
+
+    public function statById(int $columnist_id): int
+    {
+        return (new StatementModel())->statByColumnistId($columnist_id);
     }
 }

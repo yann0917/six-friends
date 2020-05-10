@@ -6,6 +6,7 @@ use Dcat\Admin\Traits\HasDateTimeFormatter;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\DB;
 
 class Statement extends Model
 {
@@ -37,5 +38,14 @@ class Statement extends Model
             1 => '收入',
             2 => '支出',
         ];
+    }
+
+    public function statByColumnistId(int $columnist_id): int
+    {
+        $stat = $this->select(DB::raw('SUM(money) as count'))
+            ->where('columnist_id', $columnist_id)
+            ->first();
+        return $stat->count ?: 0;
+
     }
 }
