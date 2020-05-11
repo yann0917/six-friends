@@ -65,6 +65,10 @@ class Statement extends Chart
                     'text' => '单位：元'
                 ]
             ],
+            'title' => [
+                'text' => '账单流水',
+                'align' => 'center',
+            ],
         ]);
     }
 
