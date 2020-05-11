@@ -33,7 +33,6 @@ class HomeController extends Controller
                     $column->row(new Columnist());
                 });
 
-                // 构建下拉菜单
                 $menu = [
                     '7' => '最近 7 天',
                     '30' => '最近 30 天',

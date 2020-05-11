@@ -60,7 +60,6 @@ class MessageController extends AdminController
             $show->title;
             $show->content;
             $show->created_at;
-            // $show->updated_at;
         });
     }
 
