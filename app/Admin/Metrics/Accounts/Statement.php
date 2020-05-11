@@ -150,6 +150,5 @@ class Statement extends Chart
 
         return parent::render();
     }
-
-
+    
 }
