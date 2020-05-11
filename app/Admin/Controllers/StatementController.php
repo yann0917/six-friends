@@ -85,32 +85,6 @@ class StatementController extends AdminController
             $show->category('分类')->get('name');
             $show->snapshot->image();
             if ($show->model()->columnist_id) {
-                // $show->columnist(function ($model) {
-                //     return Show::make($model->columnist_id, new Columnist(), function (Show $show) {
-                //         // 设置路由
-                //         $show->resource('columnist');
-                //         $show->panel()
-                //             ->tools(function (Show\Tools $tools) {
-                //                 $tools->disableEdit();
-                //                 $tools->disableList();
-                //                 $tools->disableDelete();
-                //             });
-                //         $show->nickname;
-                //         $show->gender->using(\App\Admin\Repositories\Columnist::getGender());
-                //         $show->type->using(Columnist::getType(), '未知');
-                //         $show->bio;
-                //         $show->divider();
-                //         $show->wechat_account;
-                //         $show->qq_account;
-                //         $show->phone;
-                //         $show->email;
-                //         $show->divider();
-                //         $show->score;
-                //         $show->status
-                //             ->using(Columnist::getStatus())
-                //             ->dot([0 => 'danger', 1 => 'success', 2 => 'warning', 3 => 'secondary']);
-                //     });
-                // });
                 $show->field('columnist.nickname', '写手昵称');
                 $show->words_count;
                 $show->article_num;
