@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\Statement;
+use Dcat\Admin\Admin;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -20,6 +21,10 @@ class StatementController extends AdminController
     {
         return Grid::make(new Statement(), function (Grid $grid) {
             $grid->disableDeleteButton();
+            if (Admin::user()->isRole('stockholder')) {
+                $grid->disableCreateButton();
+                $grid->disableEditButton();
+            }
             $grid->model()->orderByDesc('created_at');
 
             $grid->model()->with(['category','columnist']);
@@ -75,6 +80,9 @@ class StatementController extends AdminController
     {
         return Show::make($id, new Statement(['category', 'columnist']), function (Show $show) {
             $show->disableDeleteButton();
+            if (Admin::user()->isRole('stockholder')) {
+                $show->disableEditButton();
+            }
 
             $show->id;
             $show->date;
