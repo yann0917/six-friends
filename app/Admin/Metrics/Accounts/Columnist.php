@@ -81,11 +81,10 @@ class Columnist extends Round
                 // 图表数据
                 $total = $columnists->sum($columnists->pluck('count')->all());
 
-                $rejected_rate = round($rejected / $total,2) * 100;
-                $cooperating_rate = round($cooperating / $total, 2) * 100;
-                $pending_rate = round($pending / $total, 2) * 100;
-                $finished_rate = round($finished / $total, 2) * 100;
-
+                $rejected_rate = $total ? round($rejected / $total, 2) * 100 : 0;
+                $cooperating_rate = $total ? round($cooperating / $total, 2) * 100 : 0;
+                $pending_rate = $total ? round($pending / $total, 2) * 100 : 0;
+                $finished_rate = $total ? round($finished / $total, 2) * 100 : 0;
                 $this->withChart([$rejected_rate, $cooperating_rate, $pending_rate, $finished_rate]);
 
                 // 总数
