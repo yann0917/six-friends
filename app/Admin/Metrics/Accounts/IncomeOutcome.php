@@ -80,7 +80,8 @@ class IncomeOutcome extends Donut
         $outcome = $balance->outcome ? $balance->outcome * 0.01 : 0;
 
         // 卡片内容
-        $this->withContent($income, $outcome);
+        $this->withContent(number_format($income, 2),
+            number_format($outcome, 2));
 
         // 图表数据
         $this->withChart([$income, $outcome]);
@@ -102,13 +103,13 @@ class IncomeOutcome extends Donut
     /**
      * 设置卡片头部内容.
      *
-     * @param mixed $income
-     * @param mixed $outcome
+     * @param string $income
+     * @param string $outcome
      * @return $this
      */
-    protected function withContent($income, $outcome)
+    protected function withContent(string $income, string $outcome)
     {
-        $blue = Admin::color()->alpha('danger', 0.5);
+        $pink = Admin::color()->alpha('danger', 0.5);
 
         $style = 'margin-bottom: 8px';
         $labelWidth = 120;
@@ -123,7 +124,7 @@ class IncomeOutcome extends Donut
 </div>
 <div class="d-flex pl-1 pr-1" style="{$style}">
     <div style="width: {$labelWidth}px">
-        <i class="fa fa-circle" style="color: $blue"></i> {$this->labels[1]}
+        <i class="fa fa-circle" style="color: $pink"></i> {$this->labels[1]}
     </div>
     <div>{$outcome}</div>
 </div>

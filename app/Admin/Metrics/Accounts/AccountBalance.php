@@ -11,6 +11,7 @@ namespace App\Admin\Metrics\Accounts;
 use Dcat\Admin\Admin;
 use Dcat\Admin\Widgets\Metrics\Card;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AccountBalance extends Card
@@ -37,28 +38,29 @@ class AccountBalance extends Card
     }
 
     /**
-     * 渲染模板
+     * 处理请求
      *
-     * @return string
+     * @param Request $request
+     * @return mixed|void
      */
-    public function render()
+    public function handle(Request $request)
     {
         $balance = \App\Models\Statement::select(DB::raw('sum(if (type=1, money, 0)) as income, sum(if (type=2,money,0)) as outcome'))->first();
         $income = $balance->income * 0.01;
         $outcome = $balance->outcome * 0.01;
         $total = $income - $outcome;
-        $this->withContent($total, $income, $outcome);
-
-        return parent::render();
+        $this->withContent(number_format($total, 2),
+            number_format($income, 2),
+            number_format($outcome,2));
     }
 
     /**
-     * @param int $total
-     * @param int $income
-     * @param int $outcome
+     * @param string $total
+     * @param string $income
+     * @param string $outcome
      * @return AccountBalance
      */
-    public function withContent(int $total, int $income, int $outcome)
+    public function withContent(string $total, string $income, string $outcome)
     {
         $pink = Admin::color()->alpha('danger', 0.5);
 
@@ -105,11 +107,11 @@ HTML
             "<i class=\"feather icon-minus-circle text-secondary\"></i> 单位：元"
         );
     }
+
     /**
      * 设置卡片底部内容.
      *
      * @param string|Renderable|\Closure $footer
-     *
      * @return $this
      */
     public function footer($footer)
