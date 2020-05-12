@@ -118,9 +118,7 @@ class StatementController extends AdminController
 
             $form->display('id');
             $form->date('date')->required();
-            $form->number('money')->default(1)
-                ->min(0)
-                ->required();
+            $form->text('money')->required();
             $form->select('type')
                 ->options(Statement::getType())
                 ->load('category_id', '/api/account_category')

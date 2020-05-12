@@ -15,6 +15,10 @@ class Statement extends EloquentRepository
      */
     protected $eloquentClass = StatementModel::class;
 
+    /**
+     * @param Form $form
+     * @return array
+     */
     public function edit(Form $form): array
     {
         $form = parent::edit($form);
