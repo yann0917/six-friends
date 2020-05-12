@@ -62,8 +62,8 @@ class Statement extends Chart
             ],
             'yaxis' => [
                 'title' => [
-                    'text' => '单位：元'
-                ]
+                    'text' => '单位：元',
+                ],
             ],
             'title' => [
                 'text' => '账单流水',
@@ -101,14 +101,14 @@ class Statement extends Chart
                     function ($item, $key) {
                         return $item * 0.01;
                     }
-                )->all()
+                )->all(),
             ],
             [
                 'name' => '支出',
                 'data' => $statements->pluck('outcome')->map(
                     function ($item, $key) {
-                    return $item * 0.01;
-                })->all()
+                        return $item * 0.01;
+                    })->all(),
             ],
         ];
         $categories = $statements->pluck('date')->all();
