@@ -86,11 +86,11 @@ class Statement extends Chart
         $statements = \App\Models\Statement::select(DB::raw('sum(if (type=1, money, 0)) as income, sum(if (type=2,money,0)) as outcome'), 'date')->groupBy('date');
         switch ((int)$request->get('option')) {
             case 30:
-                $statements = $statements->where('created_at', '>=', $month)->get();
+                $statements = $statements->where('date', '>=', $month)->get();
                 break;
             case 7:
             default:
-                $statements = $statements->where('created_at', '>=', $week)->get();
+                $statements = $statements->where('date', '>=', $week)->get();
                 break;
         }
 
@@ -150,5 +150,5 @@ class Statement extends Chart
 
         return parent::render();
     }
-    
+
 }

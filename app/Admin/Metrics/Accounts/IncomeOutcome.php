@@ -63,17 +63,17 @@ class IncomeOutcome extends Donut
         $balance = \App\Models\Statement::select(DB::raw('sum(if (type=1, money, 0)) as income, sum(if (type=2,money,0)) as outcome'));
         switch ($request->get('option')) {
             case '365':
-                $balance = $balance->where('created_at', '>=', $year)->first();
+                $balance = $balance->where('date', '>=', $year)->first();
                 break;
             case '180':
-                $balance = $balance->where('created_at', '>=', $half_year)->first();
+                $balance = $balance->where('date', '>=', $half_year)->first();
                 break;
             case '30':
-                $balance = $balance->where('created_at', '>=', $month)->first();
+                $balance = $balance->where('date', '>=', $month)->first();
                 break;
             case '7':
             default:
-                $balance = $balance->where('created_at', '>=', $week)->first();
+                $balance = $balance->where('date', '>=', $week)->first();
         }
 
         $income = $balance->income ? $balance->income * 0.01 : 0;
