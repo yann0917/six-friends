@@ -46,11 +46,6 @@ class SendEmail extends Command
                 $message->to(env('MAIL_TO_ADDRESS'));
                 $message->attach($file);
             });
-        } else {
-            Mail::raw('找不到备份文件：' . $file, function (Message $message) {
-                $message->subject('定时发送备份数据-' . date('Y-m-d'));
-                $message->to(env('MAIL_TO_ADDRESS'));
-            });
         }
     }
 }
