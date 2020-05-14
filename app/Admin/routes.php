@@ -14,6 +14,7 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
     $router->resource('columnist', 'ColumnistController'); // 写手管理
+    $router->get('statement/export', 'StatementController@export'); // 账单流水
     $router->resource('account_category', 'AccountCategoryController'); // 账单分类
     $router->resource('statement', 'StatementController'); // 账单流水
     $router->resource('messages', 'MessageController'); // 留言

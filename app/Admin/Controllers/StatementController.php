@@ -2,13 +2,16 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Extensions\Tools\StatementExport as StatementExportTools;
 use App\Admin\Repositories\Statement;
+use App\Exports\StatementExport;
 use Dcat\Admin\Admin;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
 use Dcat\Admin\Controllers\AdminController;
 use App\Models\Columnist as ModelsColumnist;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StatementController extends AdminController
 {
@@ -19,7 +22,7 @@ class StatementController extends AdminController
      */
     protected function grid()
     {
-        return Grid::make(new Statement(), function (Grid $grid) {
+        return Grid::make(new Statement(['category','columnist']), function (Grid $grid) {
             $grid->disableDeleteButton();
             if (Admin::user()->isRole('stockholder')) {
                 $grid->disableCreateButton();
@@ -27,7 +30,8 @@ class StatementController extends AdminController
             }
             $grid->model()->orderByDesc('created_at');
 
-            $grid->model()->with(['category','columnist']);
+            $grid->tools(new StatementExportTools());
+
             $grid->id->sortable();
             $grid->date;
             $grid->column('money')->display(function () {
@@ -151,5 +155,11 @@ class StatementController extends AdminController
                 $form->money *= 100; // 存储分
             });
         });
+    }
+
+    public function export()
+    {
+        $fileName = '账单流水' . date('Y-m-d-H-i-s') . '.xlsx';
+        return Excel::download(new StatementExport(), $fileName);
     }
 }
