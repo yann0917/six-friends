@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5a7102107744dd4b4326a8755cdaa53e",
+    "content-hash": "ce4177b95135ed0001534790f02a37ea",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -124,16 +124,16 @@
         },
         {
             "name": "dcat/laravel-admin",
-            "version": "1.4.5",
+            "version": "1.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jqhph/dcat-admin.git",
-                "reference": "1a1008e95930f33f7fca042247faf26b62cc852c"
+                "reference": "d558331fd2af77f0236ac3e0a9f25e20cdacbe69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jqhph/dcat-admin/zipball/1a1008e95930f33f7fca042247faf26b62cc852c",
-                "reference": "1a1008e95930f33f7fca042247faf26b62cc852c",
+                "url": "https://api.github.com/repos/jqhph/dcat-admin/zipball/d558331fd2af77f0236ac3e0a9f25e20cdacbe69",
+                "reference": "d558331fd2af77f0236ac3e0a9f25e20cdacbe69",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -192,7 +192,7 @@
                 "laravel",
                 "laravel admin"
             ],
-            "time": "2020-05-23T08:46:21+00:00"
+            "time": "2020-05-27T11:47:10+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
