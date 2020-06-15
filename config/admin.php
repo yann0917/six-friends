@@ -313,19 +313,11 @@ return [
 
         'sidebar_dark' => false,
 
+        'dark_mode_switch' => true,
+
         // bg-primary, bg-info, bg-warning, bg-success, bg-danger, bg-dark
         'navbar_color' => '',
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Login page background image
-    |--------------------------------------------------------------------------
-    |
-    | This value is used to set the background image of login page.
-    |
-    */
-    'login_background_image' => '',
 
     /*
     |--------------------------------------------------------------------------
