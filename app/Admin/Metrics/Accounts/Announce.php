@@ -45,10 +45,12 @@ class Announce extends Card
     public function handle(Request $request)
     {
         $notice = \App\Models\Announce::select('title', 'content', 'created_at')->orderBy('id', 'desc')->first();
-        $title = $notice->title;
-        $content = $notice->content;
-        $created = $notice->created_at;
-        $this->withContent($title, $content, $created);
+        $title = $notice->title ?? '';
+        $content = $notice->content ?? '';
+        $created = $notice->created_at ?? '';
+        if ($content) {
+            $this->withContent($title, $content, $created);
+        }
     }
 
     /**
