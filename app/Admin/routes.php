@@ -18,6 +18,7 @@ Route::group([
     $router->resource('account_category', 'AccountCategoryController'); // 账单分类
     $router->resource('statement', 'StatementController'); // 账单流水
     $router->resource('messages', 'MessageController'); // 留言
+    $router->resource('announce', 'AnnounceController'); // 公告
 
     $router->group(['prefix' => 'api'], function(Router $router){
         $router->get('account_category', 'AccountCategoryController@category');

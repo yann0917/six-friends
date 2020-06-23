@@ -36,10 +36,6 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection nickname
      * @property Grid\Column|Collection gender
      * @property Grid\Column|Collection type
-     * @property Grid\Column|Collection snapshot
-     * @property Grid\Column|Collection columnist_id
-     * @property Grid\Column|Collection words_count
-     * @property Grid\Column|Collection article_num
      * @property Grid\Column|Collection bio
      * @property Grid\Column|Collection wechat_account
      * @property Grid\Column|Collection qq_account
@@ -48,12 +44,14 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection score
      * @property Grid\Column|Collection status
      * @property Grid\Column|Collection date
+     * @property Grid\Column|Collection snapshot
+     * @property Grid\Column|Collection words_count
+     * @property Grid\Column|Collection article_num
      * @property Grid\Column|Collection memo
      * @property Grid\Column|Collection money
      * @property Grid\Column|Collection category
-     * @property Grid\Column|Collection admin_uid
-     * @property Grid\Column|Collection title
      * @property Grid\Column|Collection content
+     * @property Grid\Column|Collection admin_uid
      * @property Grid\Column|Collection deleted_at
      * @property Grid\Column|Collection parent_id
      * @property Grid\Column|Collection order
@@ -73,6 +71,7 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection exception
      * @property Grid\Column|Collection failed_at
      * @property Grid\Column|Collection category_id
+     * @property Grid\Column|Collection columnist_id
      * @property Grid\Column|Collection email_verified_at
      *
      * @method Grid\Column|Collection id(string $label = null)
@@ -108,11 +107,14 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection score(string $label = null)
      * @method Grid\Column|Collection status(string $label = null)
      * @method Grid\Column|Collection date(string $label = null)
+     * @method Grid\Column|Collection snapshot(string $label = null)
+     * @method Grid\Column|Collection words_count(string $label = null)
+     * @method Grid\Column|Collection article_num(string $label = null)
      * @method Grid\Column|Collection memo(string $label = null)
      * @method Grid\Column|Collection money(string $label = null)
      * @method Grid\Column|Collection category(string $label = null)
-     * @method Grid\Column|Collection admin_uid(string $label = null)
      * @method Grid\Column|Collection content(string $label = null)
+     * @method Grid\Column|Collection admin_uid(string $label = null)
      * @method Grid\Column|Collection deleted_at(string $label = null)
      * @method Grid\Column|Collection parent_id(string $label = null)
      * @method Grid\Column|Collection order(string $label = null)
@@ -132,6 +134,7 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection exception(string $label = null)
      * @method Grid\Column|Collection failed_at(string $label = null)
      * @method Grid\Column|Collection category_id(string $label = null)
+     * @method Grid\Column|Collection columnist_id(string $label = null)
      * @method Grid\Column|Collection email_verified_at(string $label = null)
      */
     class Grid {}
@@ -172,16 +175,14 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection score
      * @property Show\Field|Collection status
      * @property Show\Field|Collection date
-     * @property Show\Field|Collection memo
-     * @property Show\Field|Collection money
      * @property Show\Field|Collection snapshot
-     * @property Show\Field|Collection columnist_id
      * @property Show\Field|Collection words_count
      * @property Show\Field|Collection article_num
+     * @property Show\Field|Collection memo
+     * @property Show\Field|Collection money
      * @property Show\Field|Collection category
-     * @property Show\Field|Collection admin_uid
-     * @property Show\Field|Collection title
      * @property Show\Field|Collection content
+     * @property Show\Field|Collection admin_uid
      * @property Show\Field|Collection deleted_at
      * @property Show\Field|Collection parent_id
      * @property Show\Field|Collection order
@@ -201,6 +202,7 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection exception
      * @property Show\Field|Collection failed_at
      * @property Show\Field|Collection category_id
+     * @property Show\Field|Collection columnist_id
      * @property Show\Field|Collection email_verified_at
      *
      * @method Show\Field|Collection id(string $label = null)
@@ -236,15 +238,14 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection score(string $label = null)
      * @method Show\Field|Collection status(string $label = null)
      * @method Show\Field|Collection date(string $label = null)
+     * @method Show\Field|Collection snapshot(string $label = null)
+     * @method Show\Field|Collection words_count(string $label = null)
+     * @method Show\Field|Collection article_num(string $label = null)
      * @method Show\Field|Collection memo(string $label = null)
      * @method Show\Field|Collection money(string $label = null)
      * @method Show\Field|Collection category(string $label = null)
-     * @method Show\Field|Collection snapshot(string $label = null)
-     * @method Show\Field|Collection columnist_nickname(string $label = null)
-     * @method Show\Field|Collection words_count(string $label = null)
-     * @method Show\Field|Collection article_num(string $label = null)
-     * @method Show\Field|Collection admin_uid(string $label = null)
      * @method Show\Field|Collection content(string $label = null)
+     * @method Show\Field|Collection admin_uid(string $label = null)
      * @method Show\Field|Collection deleted_at(string $label = null)
      * @method Show\Field|Collection parent_id(string $label = null)
      * @method Show\Field|Collection order(string $label = null)
@@ -264,6 +265,7 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection exception(string $label = null)
      * @method Show\Field|Collection failed_at(string $label = null)
      * @method Show\Field|Collection category_id(string $label = null)
+     * @method Show\Field|Collection columnist_id(string $label = null)
      * @method Show\Field|Collection email_verified_at(string $label = null)
      */
     class Show {}
@@ -277,19 +279,19 @@ namespace Dcat\Admin {
 
 namespace Dcat\Admin\Grid {
     /**
-
+     
      */
     class Column {}
 
     /**
-
+     
      */
     class Filter {}
 }
 
 namespace Dcat\Admin\Show {
     /**
-
+     
      */
     class Field {}
 }
