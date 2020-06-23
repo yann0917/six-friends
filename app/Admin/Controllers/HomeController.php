@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Metrics\Accounts\AccountBalance;
+use App\Admin\Metrics\Accounts\Announce;
 use App\Admin\Metrics\Accounts\Columnist;
 use App\Admin\Metrics\Accounts\IncomeOutcome;
 use App\Admin\Metrics\Accounts\Statement;
@@ -12,6 +13,7 @@ use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Layout\Row;
 use Dcat\Admin\Widgets\Box;
 use Dcat\Admin\Widgets\Dropdown;
+use Dcat\Admin\Widgets\Markdown;
 
 class HomeController extends Controller
 {
@@ -22,15 +24,17 @@ class HomeController extends Controller
             ->description('')
             ->body(function (Row $row) {
 
-                $row->column(6, function (Column $column) {
-                    $column->row(function (Row $row) {
-                        $row->column(6, new AccountBalance());
-                        $row->column(6, new IncomeOutcome());
-                    });
+                $row->column(4, function (Column $column) {
+                    $column->row(new AccountBalance());
+                    $column->row(new IncomeOutcome());
                 });
 
-                $row->column(6, function (Column $column) {
+                $row->column(4, function (Column $column) {
                     $column->row(new Columnist());
+                });
+
+                $row->column(4, function (Column $column) {
+                    $column->row(new Announce());
                 });
 
                 $menu = [
