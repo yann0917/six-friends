@@ -139,7 +139,7 @@ class StatementController extends AdminController
                 $form->title('写手费用信息');
 
                 $form->selectResource('columnist_id', '写手昵称')
-                    ->path('columnist') // 设置表格页面链接
+                    ->path('columnist?status=1') // 设置表格页面链接
                     ->options(function ($v) { // 显示已选中的数据
                         if (!$v) return $v;
                         return ModelsColumnist::findOrFail($v)->pluck('nickname', 'id');
