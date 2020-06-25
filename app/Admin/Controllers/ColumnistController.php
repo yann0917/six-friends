@@ -144,6 +144,7 @@ class ColumnistController extends AdminController
     {
         $grid = new IFrameGrid(new Columnist());
         $grid->rowSelector()->titleColumn('nickname');
+        $grid->model()->where('status',1);
 
         $grid->id->sortable();
         $grid->nickname;
