@@ -131,8 +131,7 @@ class StatementController extends AdminController
                 ->required();
             $form->textarea('memo')
                 ->rows(10)
-                ->placeholder('请填写备注如进账说明、支出说明等')
-                ->required();
+                ->placeholder('请填写备注如进账说明、支出说明等');
             $form->image('snapshot')->disk('admin');
             // 分块显示
             $form->block(6, function (Form\BlockForm $form) {
