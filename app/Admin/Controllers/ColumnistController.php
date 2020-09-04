@@ -30,10 +30,10 @@ class ColumnistController extends AdminController
                 return $money * 0.01;
             });
             $grid->bio->limit(50, '...');
-            $grid->wechat_account;
-            $grid->qq_account;
-            $grid->phone;
-            $grid->email;
+            // $grid->wechat_account;
+            // $grid->qq_account;
+            // $grid->phone;
+            // $grid->email;
             $grid->score->sortable();
             $grid->status
                 ->using(Columnist::getStatus())
