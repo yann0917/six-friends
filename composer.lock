@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cd557d184492c122c1fe921860a977e9",
+    "content-hash": "1f8671f3a6d9a6de2fee07fcf05041bf",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -112,21 +112,27 @@
         },
         {
             "name": "dcat/laravel-admin",
-            "version": "1.7.1",
+            "version": "1.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jqhph/dcat-admin.git",
-                "reference": "b2694de229a9fd52f9ab048870d4e93b8ee7a505"
+                "reference": "397f20b719009819d79e1fca5bc0186e468ef56b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jqhph/dcat-admin/zipball/b2694de229a9fd52f9ab048870d4e93b8ee7a505",
-                "reference": "b2694de229a9fd52f9ab048870d4e93b8ee7a505",
-                "shasum": ""
+                "url": "https://api.github.com/repos/jqhph/dcat-admin/zipball/397f20b719009819d79e1fca5bc0186e468ef56b",
+                "reference": "397f20b719009819d79e1fca5bc0186e468ef56b",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
             },
             "require": {
                 "doctrine/dbal": "2.*",
-                "laravel/framework": "~5.5|~6.0|~7.0",
+                "laravel/framework": "~5.5|~6.0|~7.0|~8.0",
                 "php": ">=7.1.0",
                 "spatie/eloquent-sortable": "3.*",
                 "symfony/dom-crawler": "~3.1|~4.0|~5.0"
@@ -174,7 +180,7 @@
                 "laravel",
                 "laravel admin"
             ],
-            "time": "2020-09-02T13:19:24+00:00"
+            "time": "2020-09-12T01:06:54+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
