@@ -19,6 +19,7 @@ Route::group([
     $router->resource('statement', 'StatementController'); // 账单流水
     $router->resource('messages', 'MessageController'); // 留言
     $router->resource('announce', 'AnnounceController'); // 公告
+    $router->resource('archive', 'ArchiveDocController'); // 资料库
 
     $router->group(['prefix' => 'api'], function(Router $router){
         $router->get('account_category', 'AccountCategoryController@category');
