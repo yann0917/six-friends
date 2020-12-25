@@ -246,6 +246,7 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection memo(string $label = null)
      * @method Show\Field|Collection money(string $label = null)
      * @method Show\Field|Collection category(string $label = null)
+     * @method Show\Field|Collection star(string $label = null)
      * @method Show\Field|Collection content(string $label = null)
      * @method Show\Field|Collection deleted_at(string $label = null)
      * @method Show\Field|Collection parent_id(string $label = null)
@@ -287,7 +288,7 @@ namespace Dcat\Admin {
     class Show {}
 
     /**
-     
+
      */
     class Form {}
 
@@ -295,19 +296,19 @@ namespace Dcat\Admin {
 
 namespace Dcat\Admin\Grid {
     /**
-     
+
      */
     class Column {}
 
     /**
-     
+
      */
     class Filter {}
 }
 
 namespace Dcat\Admin\Show {
     /**
-     
+
      */
     class Field {}
 }

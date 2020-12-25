@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Dcat\Admin\Traits\HasDateTimeFormatter;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
@@ -14,20 +15,19 @@ class ArchiveDoc extends Model
 
     protected $table = 'archive_doc';
 
+
     /**
-     * @return BelongsToMany
+     * @return BelongsTo
      */
-    public function stars()
+    public function star():BelongsTo
     {
-        return $this->belongsToMany(ArchiveStar::class,
-            'archive_star_doc',
-            'doc_id', 'star_id');
+        return $this->belongsTo(ArchiveStar::class, 'star_id');
     }
 
     /**
      * @return BelongsToMany
      */
-    public function tags()
+    public function tags():BelongsToMany
     {
         return $this->belongsToMany(ArchiveTag::class,
             'archive_doc_tag',

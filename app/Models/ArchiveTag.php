@@ -17,7 +17,7 @@ class ArchiveTag extends Model
     /**
      * @return BelongsToMany
      */
-    public function docs()
+    public function docs():BelongsToMany
     {
         return $this->belongsToMany(ArchiveDoc::class,
             'archive_doc_tag',

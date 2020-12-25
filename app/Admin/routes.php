@@ -7,9 +7,9 @@ use Dcat\Admin\Admin;
 Admin::routes();
 
 Route::group([
-    'prefix'        => config('admin.route.prefix'),
-    'namespace'     => config('admin.route.namespace'),
-    'middleware'    => config('admin.route.middleware'),
+    'prefix' => config('admin.route.prefix'),
+    'namespace' => config('admin.route.namespace'),
+    'middleware' => config('admin.route.middleware'),
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
@@ -20,8 +20,9 @@ Route::group([
     $router->resource('messages', 'MessageController'); // 留言
     $router->resource('announce', 'AnnounceController'); // 公告
     $router->resource('archive', 'ArchiveDocController'); // 资料库
+    $router->resource('tags', 'ArchiveTagController'); // 资料库标签
 
-    $router->group(['prefix' => 'api'], function(Router $router){
+    $router->group(['prefix' => 'api'], function (Router $router) {
         $router->get('account_category', 'AccountCategoryController@category');
     });
 
