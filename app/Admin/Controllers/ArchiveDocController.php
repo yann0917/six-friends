@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\ArchiveDoc;
+use App\Admin\Repositories\ArchiveTag;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -23,7 +24,7 @@ class ArchiveDocController extends AdminController
                 return $this->star['name'];
             });
             $grid->column('title');
-            $grid->column('reading');
+            $grid->column('reading')->sortable();
             $grid->column('link');
             $grid->column('remark');
             $grid->column('publish_at');
@@ -32,8 +33,18 @@ class ArchiveDocController extends AdminController
             $grid->column('updated_at')->sortable();
 
             $grid->filter(function (Grid\Filter $filter) {
-                $filter->equal('id');
-
+                $filter->equal('id')->width(3);
+                $filter->where('star_name', function ($query) {
+                    $query->whereHas('star', function ($query) {
+                        $query->where('name', 'like', "%{$this->input}%");
+                    });
+                }, '姓名')->width(3);
+                $filter->like('title')->width(3);
+                $filter->where('tag_name', function ($query) {
+                    $query->whereHas('tags', function ($query) {
+                        $query->where('name', 'like', "%{$this->input}%");
+                    });
+                }, '文章标签')->width(3);
             });
         });
     }
@@ -42,7 +53,6 @@ class ArchiveDocController extends AdminController
      * Make a show builder.
      *
      * @param mixed $id
-     *
      * @return Show
      */
     protected function detail($id)
@@ -52,9 +62,29 @@ class ArchiveDocController extends AdminController
             $show->star('姓名')->get('name');
             $show->field('title');
             $show->field('reading');
-            $show->field('link');
+            $show->link()->link();
             $show->field('remark');
             $show->field('publish_at');
+
+            $show->tags('标签', function ($model) {
+                $grid = new Grid(new  ArchiveTag());
+                $grid->model()->join('archive_doc_tag', function ($join) use ($model) {
+                    $join->on('archive_doc_tag.tag_id', 'archive_tag.id')
+                        ->where('doc_id', '=', $model->id);
+                });
+
+                $grid->resource('tags');
+
+                $grid->id;
+                $grid->name;
+
+                $grid->filter(function (Grid\Filter $filter) {
+                    $filter->equal('id')->width(3);
+                    $filter->like('name')->width(3);
+                });
+                return $grid;
+            });
+
             $show->field('created_at');
             $show->field('updated_at');
         });

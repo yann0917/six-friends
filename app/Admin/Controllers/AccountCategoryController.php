@@ -37,7 +37,6 @@ class AccountCategoryController extends AdminController
             $grid->created_at;
 
             $grid->filter(function (Grid\Filter $filter) {
-                $filter->panel();
                 $filter->equal('id')->width(3);
                 $filter->like('name')->width(3);
             });

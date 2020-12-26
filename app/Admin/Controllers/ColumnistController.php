@@ -43,7 +43,6 @@ class ColumnistController extends AdminController
             $grid->created_at;
 
             $grid->filter(function (Grid\Filter $filter) {
-                $filter->panel();
                 $filter->equal('id')->width(3);
                 $filter->like('nickname')->width(3);
                 $filter->equal('type')

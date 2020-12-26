@@ -25,6 +25,10 @@ use Dcat\Admin\Show;
 Grid::resolving(function (Grid $grid) {
     $grid->disableBatchDelete(); // 禁用批量删除
     $grid->disableRowSelector(); // 禁用行选择器
+
+    $grid->filter(function (Grid\Filter $filter){
+        $filter->panel();
+    });
 });
 
 // 注册 WangEditor
