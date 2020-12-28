@@ -2,8 +2,11 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Renderable\ArchiveTagTable;
 use App\Admin\Repositories\ArchiveDoc;
 use App\Admin\Repositories\ArchiveTag;
+use App\Models\ArchiveStar;
+use App\Models\ArchiveTag as ModelsArchiveTag;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -25,7 +28,7 @@ class ArchiveDocController extends AdminController
             });
             $grid->column('title');
             $grid->column('reading')->sortable();
-            $grid->column('link');
+            $grid->column('link')->link();
             $grid->column('remark');
             $grid->column('publish_at');
             $grid->tags('标签')->pluck('name')->label();
@@ -34,11 +37,7 @@ class ArchiveDocController extends AdminController
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id')->width(3);
-                $filter->where('star_name', function ($query) {
-                    $query->whereHas('star', function ($query) {
-                        $query->where('name', 'like', "%{$this->input}%");
-                    });
-                }, '姓名')->width(3);
+                $filter->like('star.name', '姓名')->width(3);
                 $filter->like('title')->width(3);
                 $filter->where('tag_name', function ($query) {
                     $query->whereHas('tags', function ($query) {
@@ -62,10 +61,9 @@ class ArchiveDocController extends AdminController
             $show->star('姓名')->get('name');
             $show->field('title');
             $show->field('reading');
-            $show->link()->link();
+            $show->field('link')->link();
             $show->field('remark');
             $show->field('publish_at');
-
             $show->tags('标签', function ($model) {
                 $grid = new Grid(new  ArchiveTag());
                 $grid->model()->join('archive_doc_tag', function ($join) use ($model) {
@@ -99,17 +97,19 @@ class ArchiveDocController extends AdminController
     {
         return Form::make(new ArchiveDoc(['star', 'tags']), function (Form $form) {
             $form->display('id');
-            $form->text('star.name')->label('姓名');
+            $form->select('star_id', '姓名')
+                ->model(ArchiveStar::class, 'id', 'name')
+                ->ajax('api/stars');;
             $form->text('title');
             $form->text('reading');
-            $form->text('link');
+            $form->url('link');
             $form->text('remark');
+            $form->multipleSelectTable('tags.ids', '标签')
+                ->title('文章标签')
+                ->max(10) // 最多选择 10 个选项，不传则不限制
+                ->from(ArchiveTagTable::make(['id' => $form->getKey()])) // 设置渲染类实例，并传递自定义参数
+                ->model(ModelsArchiveTag::class, 'id', 'name');  // 设置编辑数据显示
             $form->datetime('publish_at');
-            // $form->text('tags')
-            //     ->customFormat(function ($v) {
-            //     if (!$v) return [];
-            //     return array_column($v, 'id');
-            // });
 
             $form->display('created_at');
             $form->display('updated_at');

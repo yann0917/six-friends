@@ -2,6 +2,8 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\ArchiveTag as ModelsArchiveTag;
+use Illuminate\Http\Request;
 use App\Admin\Repositories\ArchiveTag;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
@@ -19,13 +21,13 @@ class ArchiveTagController extends AdminController
     {
         return Grid::make(new ArchiveTag(), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('name');
+            $grid->column('name')->label();
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
-        
+
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
-        
+
             });
         });
     }
@@ -34,7 +36,6 @@ class ArchiveTagController extends AdminController
      * Make a show builder.
      *
      * @param mixed $id
-     *
      * @return Show
      */
     protected function detail($id)
@@ -57,9 +58,15 @@ class ArchiveTagController extends AdminController
         return Form::make(new ArchiveTag(), function (Form $form) {
             $form->display('id');
             $form->text('name');
-        
+
             $form->display('created_at');
             $form->display('updated_at');
         });
+    }
+
+    public function tags(Request $request)
+    {
+        $q = $request->get('q');
+        return ArchiveTag::index($q);
     }
 }

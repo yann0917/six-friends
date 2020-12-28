@@ -13,4 +13,9 @@ class ArchiveTag extends EloquentRepository
      * @var string
      */
     protected $eloquentClass = Model::class;
+
+    public static function index($name = '')
+    {
+        return Model::where('name', 'like', "%$name%")->paginate(null, ['id', 'name as text']);
+    }
 }

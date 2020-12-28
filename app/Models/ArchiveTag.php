@@ -13,6 +13,7 @@ class ArchiveTag extends Model
     use SoftDeletes;
 
     protected $table = 'archive_tag';
+    protected $fillable = ['name'];
 
     /**
      * @return BelongsToMany
@@ -21,7 +22,7 @@ class ArchiveTag extends Model
     {
         return $this->belongsToMany(ArchiveDoc::class,
             'archive_doc_tag',
-            'tag_id', 'doc_id');
+            'tag_id', 'doc_id')->withTimestamps();
     }
 
 }

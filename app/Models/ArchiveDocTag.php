@@ -12,5 +12,6 @@ class ArchiveDocTag extends Model
     use SoftDeletes;
 
     protected $table = 'archive_doc_tag';
-    
+    protected $fillable = ['doc_id', 'tag_id'];
+
 }

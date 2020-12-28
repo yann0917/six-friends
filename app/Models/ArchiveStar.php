@@ -13,6 +13,7 @@ class ArchiveStar extends Model
     use SoftDeletes;
 
     protected $table = 'archive_star';
+    protected $fillable = ['name'];
 
 
     /**
@@ -20,6 +21,6 @@ class ArchiveStar extends Model
      */
     public function docs():HasMany
     {
-        return $this->hasMany(ArchiveDoc::class, 'star_id');
+        return $this->hasMany(ArchiveDoc::class, 'star_id', 'id');
     }
 }

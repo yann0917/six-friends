@@ -3,6 +3,7 @@
 namespace App\Admin\Repositories;
 
 use App\Models\ArchiveDoc as Model;
+use Dcat\Admin\Form;
 use Dcat\Admin\Repositories\EloquentRepository;
 
 class ArchiveDoc extends EloquentRepository

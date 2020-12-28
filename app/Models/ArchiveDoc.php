@@ -14,24 +14,25 @@ class ArchiveDoc extends Model
     use SoftDeletes;
 
     protected $table = 'archive_doc';
+    protected $fillable = ['star_id', 'title', 'reading', 'link', 'remark', 'publish_at'];
 
 
     /**
      * @return BelongsTo
      */
-    public function star():BelongsTo
+    public function star(): BelongsTo
     {
-        return $this->belongsTo(ArchiveStar::class, 'star_id');
+        return $this->belongsTo(ArchiveStar::class, 'star_id', 'id');
     }
 
     /**
      * @return BelongsToMany
      */
-    public function tags():BelongsToMany
+    public function tags(): BelongsToMany
     {
         return $this->belongsToMany(ArchiveTag::class,
             'archive_doc_tag',
-            'doc_id', 'tag_id');
+            'doc_id', 'tag_id')->withTimestamps();
     }
 
 }

@@ -7,6 +7,7 @@ use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
 use Dcat\Admin\Controllers\AdminController;
+use Illuminate\Http\Request;
 
 class ArchiveStarController extends AdminController
 {
@@ -22,10 +23,10 @@ class ArchiveStarController extends AdminController
             $grid->column('name');
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
-        
+
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
-        
+
             });
         });
     }
@@ -57,9 +58,16 @@ class ArchiveStarController extends AdminController
         return Form::make(new ArchiveStar(), function (Form $form) {
             $form->display('id');
             $form->text('name');
-        
+
             $form->display('created_at');
             $form->display('updated_at');
         });
+    }
+
+    public function stars(Request $request)
+    {
+        $q = $request->get('q');
+
+        return ArchiveStar::index($q);
     }
 }

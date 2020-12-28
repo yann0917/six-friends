@@ -19,11 +19,14 @@ Route::group([
     $router->resource('statement', 'StatementController'); // 账单流水
     $router->resource('messages', 'MessageController'); // 留言
     $router->resource('announce', 'AnnounceController'); // 公告
-    $router->resource('archive', 'ArchiveDocController'); // 资料库
+    $router->resource('archives', 'ArchiveDocController'); // 资料库
     $router->resource('tags', 'ArchiveTagController'); // 资料库标签
+    $router->resource('stars', 'ArchiveStarController'); // 资料库明星
 
     $router->group(['prefix' => 'api'], function (Router $router) {
         $router->get('account_category', 'AccountCategoryController@category');
+        $router->get('tags', 'ArchiveTagController@tags');
+        $router->get('stars', 'ArchiveStarController@stars');
     });
 
 });
