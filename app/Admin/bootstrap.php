@@ -24,7 +24,7 @@ use Dcat\Admin\Show;
 // 监听表格初始化事件
 Grid::resolving(function (Grid $grid) {
     $grid->disableBatchDelete(); // 禁用批量删除
-    $grid->disableRowSelector(); // 禁用行选择器
+    // $grid->disableRowSelector(); // 禁用行选择器
 
     $grid->filter(function (Grid\Filter $filter){
         $filter->panel();

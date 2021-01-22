@@ -21,7 +21,7 @@ class MessageController extends AdminController
         return Grid::make(new Message(), function (Grid $grid) {
             $grid->model()->orderByDesc('created_at');
             $grid->disableDeleteButton();
-
+            $grid->disableRowSelector();
             $grid->actions(function (Grid\Displayers\Actions $actions) {
                 $admin_uid = $actions->row->admin_uid;
                 if ($admin_uid != Admin::user()->id) {

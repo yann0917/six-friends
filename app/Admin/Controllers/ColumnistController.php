@@ -19,6 +19,7 @@ class ColumnistController extends AdminController
     protected function grid()
     {
         return Grid::make(new Columnist(), function (Grid $grid) {
+            $grid->disableRowSelector();
             $grid->model()->orderByRaw("FIELD(status, " . implode(", ", [1, 2, 3, 0]) . ")")->orderByDesc('created_at');
             $grid->id->sortable();
             $grid->nickname;

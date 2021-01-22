@@ -20,6 +20,7 @@ class AnnounceController extends AdminController
     {
         return Grid::make(new Announce(), function (Grid $grid) {
             $grid->disableDeleteButton();
+            $grid->disableRowSelector();
             $grid->model()->orderByDesc('created_at');
             $grid->id->sortable();
             $grid->title;

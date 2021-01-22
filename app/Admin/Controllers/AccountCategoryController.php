@@ -22,6 +22,7 @@ class AccountCategoryController extends AdminController
     protected function grid()
     {
         return Grid::make(new AccountCategory(), function (Grid $grid) {
+            $grid->disableRowSelector();
             $grid->actions(function (Grid\Displayers\Actions $actions) {
                 $id = $actions->row->id;
                 if (in_array($id, array_keys(AccountCategory::getBaseCate()))) {

@@ -20,6 +20,7 @@ class ArchiveTagController extends AdminController
     protected function grid()
     {
         return Grid::make(new ArchiveTag(), function (Grid $grid) {
+            $grid->disableRowSelector();
             $grid->column('id')->sortable();
             $grid->column('name')->label();
             $grid->column('created_at');

@@ -22,6 +22,7 @@ class ArchiveDocController extends AdminController
     protected function grid()
     {
         return Grid::make(new ArchiveDoc(['star', 'tags']), function (Grid $grid) {
+            $grid->disableRowSelector();
             $grid->column('id')->sortable();
             $grid->column('star_name', '姓名')->display(function () {
                 return $this->star['name'];
@@ -104,9 +105,8 @@ class ArchiveDocController extends AdminController
             $form->text('reading');
             $form->url('link');
             $form->text('remark');
-            $form->multipleSelectTable('tags.ids', '标签')
+            $form->multipleSelectTable('tags.tag_id', '标签')
                 ->title('文章标签')
-                ->max(10) // 最多选择 10 个选项，不传则不限制
                 ->from(ArchiveTagTable::make(['id' => $form->getKey()])) // 设置渲染类实例，并传递自定义参数
                 ->model(ModelsArchiveTag::class, 'id', 'name');  // 设置编辑数据显示
             $form->datetime('publish_at');

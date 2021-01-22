@@ -24,6 +24,7 @@ class StatementController extends AdminController
     {
         return Grid::make(new Statement(['category','columnist']), function (Grid $grid) {
             $grid->disableDeleteButton();
+            $grid->disableRowSelector();
             if (Admin::user()->isRole('stockholder')) {
                 $grid->disableCreateButton();
                 $grid->disableEditButton();
